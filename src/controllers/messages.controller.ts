@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getMessagesByPhone } from "../services/message.service.ts";
+import { getMessagesByPhone } from "../services/message.service";
 
 export const listMessages = (req: Request, res: Response) => {
   const phone = req.params.phone!;

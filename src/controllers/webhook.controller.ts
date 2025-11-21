@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { autoReply, saveMessage } from "../services/message.service.ts";
+import { autoReply, saveMessage } from "../services/message.service";
 
 export const verifyWebhook = (req: Request, res: Response) => {
   const mode = req.query["hub.mode"];
