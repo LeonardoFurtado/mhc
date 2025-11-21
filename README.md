@@ -2,7 +2,7 @@
 
 API Simples que simula a integração básica com WhatsApp Business API da Meta.
 
-Link para aplicação em execução: `mhc-production-e907.up.railway.app`
+Link para aplicação em execução: `https://mhc-production-e907.up.railway.app`
 
 # Requisitos
 
