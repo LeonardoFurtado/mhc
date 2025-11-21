@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { autoReply, saveMessage } from "../services/message.service";
+import obterRespostaReceita from "../services/openai.service";
 
 export const verifyWebhook = (req: Request, res: Response) => {
   console.log("Query recebida:", req.query);
@@ -14,11 +15,10 @@ export const verifyWebhook = (req: Request, res: Response) => {
   return res.sendStatus(403);
 };
 
-export const receiveMessage = (req: Request, res: Response) => {
+export const receiveMessage = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-
-    const messages = body?.entry?.[0]?.changes?.[0]?.value?.messages;
+    const messages = body?.value?.messages;
 
     if (!messages) {
       return res.sendStatus(200);
@@ -31,7 +31,9 @@ export const receiveMessage = (req: Request, res: Response) => {
 
     saveMessage({ from, body: text, timestamp });
 
-    const reply = autoReply(text);
+    const gpt_reply = await obterRespostaReceita(text)
+
+    const reply = gpt_reply ?? autoReply(text);
 
     return res.status(200).json({
       status: "message_received",
