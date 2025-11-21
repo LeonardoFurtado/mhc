@@ -14,3 +14,11 @@ services:
     env_file:
       - .env
     command: npm run dev
+  tests:
+    build: .
+    container_name: whatsapp_api_tests
+    command: npm test
+    volumes:
+      - .:/app
+    environment:
+      - VERIFY_TOKEN=MEUTOKEN
