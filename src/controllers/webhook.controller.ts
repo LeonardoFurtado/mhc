@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { autoReply, saveMessage } from "../services/message.service";
 
 export const verifyWebhook = (req: Request, res: Response) => {
+  console.log("Query recebida:", req.query);
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
